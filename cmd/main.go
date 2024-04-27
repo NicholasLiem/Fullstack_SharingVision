@@ -32,6 +32,7 @@ func main() {
 	dao := repository.NewDAO(db)
 
 	postService := service.NewPostService(dao)
+
 	/**
 	Registering Services to Server
 	*/
@@ -46,10 +47,11 @@ func main() {
 	serverRouter := adapter.NewRouter(*server)
 
 	port := os.Getenv("PORT")
-	log.Println("Running the server on port " + port)
+	log.Println("[Server] Running the server on port " + port)
 
-	if os.Getenv("ENVIRONMENT") == "DEVELOPMENT" {
+	if os.Getenv("ENVIRONMENT") == "DEV" {
 		log.Fatal(http.ListenAndServe("127.0.0.1:"+port, serverRouter))
+	} else {
+		log.Fatal(http.ListenAndServe(":"+port, serverRouter))
 	}
-	log.Fatal(http.ListenAndServe(":"+port, serverRouter))
 }

@@ -11,8 +11,8 @@ type Post struct {
 	Title       string    `gorm:"size:200;not null" json:"title"`
 	Content     string    `gorm:"type:text;not null" json:"content"`
 	Category    string    `gorm:"size:100;not null" json:"category"`
-	CreatedDate time.Time `gorm:"default:current_timestamp" json:"created_date"`
-	UpdatedDate time.Time `gorm:"default:current_timestamp on update current_timestamp" json:"updated_date"`
+	CreatedDate time.Time `gorm:"autoCreateTime" json:"created_date"`
+	UpdatedDate time.Time `gorm:"autoUpdateTime" json:"updated_date"`
 	Status      string    `gorm:"type:varchar(100);not null;check:status in ('Publish','Draft','Thrash')" json:"status"`
 }
 
