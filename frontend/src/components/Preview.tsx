@@ -57,7 +57,7 @@ const Preview: React.FC = () => {
                             <Paper elevation={2} style={{ padding: '20px' }}>
                                 <Typography variant="h6">{post.title}</Typography>
                                 <Typography variant="body2">Category: {post.category}</Typography>
-                                <Typography>{post.content}</Typography>
+                                <Typography style={{ overflowWrap: 'break-word' }}>{post.content}</Typography>
                             </Paper>
                         </Grid>
                     ))}
