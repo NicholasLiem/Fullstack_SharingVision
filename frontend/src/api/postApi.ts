@@ -24,7 +24,7 @@ async function getPagedPost(limit: number, offset: number): Promise<PagedPostDTO
   }
 }
 
-async function createPost(postData: PostCreateDTO): Promise<Post[]> {
+async function createPost(postData: PostCreateDTO): Promise<boolean> {
   try {
     const response = await api.post('/article', postData);
     return response.data;
@@ -33,10 +33,18 @@ async function createPost(postData: PostCreateDTO): Promise<Post[]> {
   }
 }
 
+async function getAllPost(): Promise<Post[]> {
+  try {
+    const response = await api.get('/article/all');
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to fetch posts');
+  }
+}
 
 async function getPostById(id: number): Promise<Post> {
   const response = await api.get<Post>(`/article/${id}`);
   return response.data;
 }
 
-export { getPagedPost, getPostById, createPost };
+export { getPagedPost, getPostById, createPost, getAllPost };

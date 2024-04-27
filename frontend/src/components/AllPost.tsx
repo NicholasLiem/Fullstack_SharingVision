@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Tab, Tabs, Table, TableBody, TableCell, TableHead, TableRow, IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { getPagedPost, Post, PostStatus } from '../api/postApi';
+import { getAllPost, Post, PostStatus } from '../api/postApi';
 
 const AllPosts: React.FC = () => {
   const [activeTab, setActiveTab] = useState<PostStatus>(PostStatus.PUBLISH);
@@ -11,13 +11,12 @@ const AllPosts: React.FC = () => {
   useEffect(() => {
     const fetchPosts = async () => {
         try {
-            const data = await getPagedPost(0, 100);
-            setPosts(data.posts);
+            const data = await getAllPost();
+            setPosts(data);
         } catch (error) {
             console.error("Failed to fetch posts:", error);
         }
     };
-
     fetchPosts();
   }, []);
 
@@ -25,13 +24,15 @@ const AllPosts: React.FC = () => {
     setActiveTab(newValue);
   };
 
-  const handleEdit = (lala: string) => {
-    console.log("Editing:", lala);
+  const handleEdit = (postId: number) => {
+    console.log("Editing:", postId);
   };
 
   const handleTrash = (postId: number) => {
     console.log(postId)
   };
+
+  const filteredPosts = posts.filter(post => post.status === activeTab);
 
   return (
     <>
@@ -49,24 +50,30 @@ const AllPosts: React.FC = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {posts.map((post: Post) => (
-            <TableRow key={post.id}>
-              <TableCell>{post.title}</TableCell>
-              <TableCell>{post.category}</TableCell>
-              <TableCell>
-                <IconButton onClick={() => handleEdit("lol")}>
-                  <EditIcon />
-                </IconButton>
-                <IconButton onClick={() => handleTrash(post.id)}>
-                  <DeleteIcon />
-                </IconButton>
-              </TableCell>
+          {filteredPosts.length > 0 ? (
+            filteredPosts.map((post: Post) => (
+              <TableRow key={post.id}>
+                <TableCell>{post.title}</TableCell>
+                <TableCell>{post.category}</TableCell>
+                <TableCell>
+                  <IconButton onClick={() => handleEdit(post.id)}>
+                    <EditIcon />
+                  </IconButton>
+                  <IconButton onClick={() => handleTrash(post.id)}>
+                    <DeleteIcon />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={3}>No posts available.</TableCell>
             </TableRow>
-          ))}
+          )}
         </TableBody>
       </Table>
     </>
-  );
+  );  
 }
 
 
