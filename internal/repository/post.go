@@ -6,10 +6,10 @@ import (
 )
 
 type PostQuery interface {
-	CreatePost(Post datastruct.Post) (*datastruct.Post, error)
-	UpdatePost(PostId uint) (*datastruct.Post, error)
-	DeletePost(PostId uint) (*datastruct.Post, error)
-	GetPost(PostId uint) (*datastruct.Post, error)
+	CreatePost(post datastruct.Post) (bool, error)
+	UpdatePost(postId uint, updatedPost datastruct.Post) (bool, error)
+	DeletePost(postId uint) (bool, error)
+	GetPost(postId uint) (*datastruct.Post, error)
 }
 
 type postQuery struct {
@@ -22,18 +22,44 @@ func NewPostQuery(mysql *gorm.DB) PostQuery {
 	}
 }
 
-func (aq *postQuery) CreatePost(post datastruct.Post) (*datastruct.Post, error) {
-	return nil, nil
+func (pq *postQuery) CreatePost(post datastruct.Post) (bool, error) {
+	result := pq.mysqldb.Create(&post)
+	if result.Error != nil {
+		return false, result.Error
+	}
+	return true, nil
 }
 
-func (aq *postQuery) UpdatePost(postId uint) (*datastruct.Post, error) {
-	return nil, nil
+func (pq *postQuery) UpdatePost(postId uint, updatedPost datastruct.Post) (bool, error) {
+	var post datastruct.Post
+	if err := pq.mysqldb.First(&post, postId).Error; err != nil {
+		return false, err
+	}
+
+	result := pq.mysqldb.Model(&post).Updates(updatedPost)
+	if result.Error != nil {
+		return false, result.Error
+	}
+	return true, nil
 }
 
-func (aq *postQuery) DeletePost(postId uint) (*datastruct.Post, error) {
-	return nil, nil
+func (pq *postQuery) DeletePost(postId uint) (bool, error) {
+	var post datastruct.Post
+	if err := pq.mysqldb.First(&post, postId).Error; err != nil {
+		return false, err
+	}
+
+	result := pq.mysqldb.Delete(&post)
+	if result.Error != nil {
+		return false, result.Error
+	}
+	return true, nil
 }
 
-func (aq *postQuery) GetPost(postId uint) (*datastruct.Post, error) {
-	return nil, nil
+func (pq *postQuery) GetPost(postId uint) (*datastruct.Post, error) {
+	var post datastruct.Post
+	if err := pq.mysqldb.First(&post, postId).Error; err != nil {
+		return nil, err
+	}
+	return &post, nil
 }
