@@ -1,4 +1,4 @@
-import { PagedPostDTO, PostCreateDTO } from '../dto/post';
+import { PagedPostDTO, PostCreateDTO, PostUpdateDTO } from '../dto/post';
 import { api } from './index';
 
 export enum PostStatus {
@@ -42,6 +42,15 @@ async function deletePost(postId: number): Promise<boolean> {
   }
 }
 
+async function updatePost(postId: number, postData: PostUpdateDTO): Promise<boolean> {
+  try {
+    const response = await api.patch<boolean>(`/article/${postId}`, postData)
+    return response.data
+  } catch (error) {
+    throw new Error("Can't fetch posts")
+  }
+}
+
 async function getAllPost(): Promise<Post[]> {
   try {
     const response = await api.get('/article/all');
@@ -56,4 +65,4 @@ async function getPostById(id: number): Promise<Post> {
   return response.data;
 }
 
-export { getPagedPost, getPostById, createPost, getAllPost, deletePost };
+export { getPagedPost, getPostById, createPost, getAllPost, deletePost, updatePost };

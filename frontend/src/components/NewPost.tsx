@@ -34,12 +34,10 @@ const NewPost: React.FC = () => {
         };
     
         try {
-          const newPost = await createPost(postData);
-          console.log('Post created successfully:', newPost);
+          await createPost(postData);
           alert(`Post ${status === PostStatus.PUBLISH ? 'published' : 'drafted'} successfully!`);
           setFormData({ title: '', content: '', category: '', status: '' });
         } catch (error) {
-          console.error('Failed to create post:', error);
           alert('Failed to post data. Please try again.');
         }
       };

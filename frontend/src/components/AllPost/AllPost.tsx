@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import { Tab, Tabs, Table, TableBody, TableCell, TableHead, TableRow, IconButton } from '@mui/material';
+import { deletePost, getAllPost, Post, PostStatus } from '../../api/postApi';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { deletePost, getAllPost, Post, PostStatus } from '../api/postApi';
+import EditModal from './EditModal';
 
 const AllPosts: React.FC = () => {
   const [activeTab, setActiveTab] = useState<PostStatus>(PostStatus.PUBLISH);
   const [posts, setPosts] = useState<Post[]>([]);
+  const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -21,7 +24,11 @@ const AllPosts: React.FC = () => {
   };
 
   const handleEdit = (postId: number) => {
-    console.log("Editing:", postId);
+    const postToEdit = posts.find(post => post.id === postId);
+    if (postToEdit) {
+      setSelectedPost(postToEdit);
+      setEditModalOpen(true);
+    }
   };
 
   const handleTrash = (postId: number) => {
@@ -78,6 +85,10 @@ const AllPosts: React.FC = () => {
           </TableBody>
         </Table>
       </div>
+      <EditModal open={editModalOpen} 
+                  handleClose={() => setEditModalOpen(false)} 
+                  post={selectedPost} 
+      />
     </div>
   );  
 }

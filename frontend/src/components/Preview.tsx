@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getPagedPost, Post } from "../../api/postApi";
+import { getPagedPost, Post } from "../api/postApi";
 import { Container, Grid, MenuItem, Pagination, Paper, Select, SelectChangeEvent, Typography } from "@mui/material";
 
 const Preview: React.FC = () => {
@@ -56,9 +56,8 @@ const Preview: React.FC = () => {
                         <Grid item xs={12}>
                             <Paper elevation={2} style={{ padding: '20px' }}>
                                 <Typography variant="h6">{post.title}</Typography>
-                                <Typography>{post.content}</Typography>
                                 <Typography variant="body2">Category: {post.category}</Typography>
-                                <Typography variant="body2">Status: {post.status}</Typography>
+                                <Typography>{post.content}</Typography>
                             </Paper>
                         </Grid>
                     ))}

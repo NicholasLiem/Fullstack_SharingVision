@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Preview from './components/Preview/Preview';
-import AllPosts from './components/AllPost';
+import Preview from './components/Preview';
+import AllPosts from './components/AllPost/AllPost';
 import NewPost from './components/NewPost';
 
 function App() {

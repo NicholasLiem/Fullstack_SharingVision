@@ -7,6 +7,13 @@ export interface PostCreateDTO {
     status: PostStatus;
 }
 
+export interface PostUpdateDTO {
+    title: string | null;
+    content: string | null;
+    category: string | null;
+    status: PostStatus | null;
+}
+
 export interface PagedPostDTO {
     posts: Post[],
     totalPages: number,
