@@ -45,8 +45,7 @@ func (m *MicroserviceServer) GetPost(rw http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response := result.ToPostResponse()
-	if err := json.NewEncoder(rw).Encode(response); err != nil {
+	if err := json.NewEncoder(rw).Encode(result); err != nil {
 		http.Error(rw, err.Error(), http.StatusInternalServerError)
 		return
 	}

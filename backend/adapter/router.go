@@ -10,7 +10,6 @@ import (
 )
 
 func NewRouter(server app.MicroserviceServer) *mux.Router {
-
 	router := mux.NewRouter()
 
 	structs.AppRoutes = append(structs.AppRoutes, routes.ArticleRoutes(server))

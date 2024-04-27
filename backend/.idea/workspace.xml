@@ -5,29 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6227ac56-9598-49e4-b639-9359b0da6957" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/../.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.github/workflows/go_ci.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../adapter/middleware/middleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/adapter/middleware/middleware.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../adapter/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/adapter/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../adapter/routes/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/adapter/routes/article.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../adapter/structs/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/adapter/structs/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmd/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../internal/app/post_handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/post_handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../internal/app/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../internal/datastruct/migrate.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/datastruct/migrate.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../internal/datastruct/post.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/datastruct/post.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../internal/repository/dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/dao.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../internal/repository/post.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/post.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../internal/service/post.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/service/post.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../utils/error.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/error.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../utils/http/response.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/http/response.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../utils/parse_str.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/parse_str.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adapter/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/adapter/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/app/post_handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/post_handlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/datastruct/post.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/datastruct/post.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/service/post.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/service/post.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/assets/react.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/pages/AllPost.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/pages/NewPost.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/pages/Preview.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,21 +32,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "NicholasLiem"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;NicholasLiem&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/NicholasLiem/BE_T_SharingVision.git",
-    "accountId": "1d535afc-382a-4cc0-8836-9aae936dfe00"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/NicholasLiem/BE_T_SharingVision.git&quot;,
+    &quot;accountId&quot;: &quot;1d535afc-382a-4cc0-8836-9aae936dfe00&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2ffzJcOlzI13UqKvo8YXPlGnoMp" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -69,6 +63,8 @@
     "go.import.settings.migrated": "true",
     "go.sdk.automatically.set": "true",
     "last_opened_file_path": "/home/nicholas/Desktop/Repository/Personal/BE_T_SharingVision/backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm"
   }
 }]]></component>

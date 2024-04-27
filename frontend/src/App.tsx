@@ -1,35 +1,63 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import Preview from './components/Preview';
+import AllPosts from './components/AllPost';
+import NewPost from './components/NewPost';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [activeComponent, setActiveComponent] = useState('preview');
+
+  const renderComponent = () => {
+    switch (activeComponent) {
+      case 'preview':
+        return <Preview/>
+      case 'allPosts':
+        return <AllPosts/>
+      case 'newPost':
+        return <NewPost />
+      default:
+        return <Preview/>
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: '100vh',
+      width: '100vw',
+    }}>
+      <div style={{ marginBottom: '20px' }}>
+        <button onClick={() => setActiveComponent('preview')}>Preview</button>
+        <button onClick={() => setActiveComponent('allPosts')}>All Posts</button>
+        <button onClick={() => setActiveComponent('newPost')}>New Post</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+      <div style={{
+        width: '80%',
+        height: '80%',
+        border: '1px solid gray',
+        background: 'white',
+        padding: '20px',
+        textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        overflow: 'auto'
+      }}>
+        <div style={{
+          maxWidth: '100%',
+          maxHeight: '80vh',
+          transformOrigin: 'top left',
+          transition: 'transform 0.3s ease-out',
+          margin: '20px',
+        }}>
+          {renderComponent()}
+        </div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;

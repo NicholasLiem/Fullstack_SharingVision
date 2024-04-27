@@ -29,17 +29,6 @@ type PostResponse struct {
 	Status      string    `json:"status"`
 }
 
-func (post *Post) ToPostResponse() *PostResponse {
-	return &PostResponse{
-		Title:       post.Title,
-		Content:     post.Content,
-		Category:    post.Category,
-		CreatedDate: post.CreatedDate,
-		UpdatedDate: post.UpdatedDate,
-		Status:      post.Status,
-	}
-}
-
 func (post *Post) BeforeSave(tx *gorm.DB) (err error) {
 	if len(post.Title) < 20 {
 		return errors.New("the title must be at least 20 characters long")
@@ -56,7 +45,5 @@ func (post *Post) BeforeSave(tx *gorm.DB) (err error) {
 	if _, ok := validStatus[post.Status]; !ok {
 		return errors.New("invalid status, must be 'publish', 'draft', or 'thrash'")
 	}
-
 	return nil
-
 }

@@ -7,6 +7,7 @@ import (
 	"github.com/NicholasLiem/BE_T_SharingVision/internal/repository"
 	"github.com/NicholasLiem/BE_T_SharingVision/internal/service"
 	"github.com/joho/godotenv"
+	"github.com/rs/cors"
 	"log"
 	"net/http"
 	"os"
@@ -46,12 +47,22 @@ func main() {
 	datastruct.Migrate(db, &datastruct.Post{})
 	serverRouter := adapter.NewRouter(*server)
 
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{"*"},
+		AllowedMethods:   []string{"GET", "POST", "OPTIONS", "PATCH"},
+		AllowedHeaders:   []string{"Authorization", "Content-Type"},
+		AllowCredentials: true,
+		ExposedHeaders:   []string{},
+	})
+
+	handler := c.Handler(serverRouter)
+
 	port := os.Getenv("BE_PORT")
 	log.Println("[Server] Running the server on port " + port)
 
 	if os.Getenv("ENVIRONMENT") == "DEV" {
-		log.Fatal(http.ListenAndServe("127.0.0.1:"+port, serverRouter))
+		log.Fatal(http.ListenAndServe("127.0.0.1:"+port, handler))
 	} else {
-		log.Fatal(http.ListenAndServe(":"+port, serverRouter))
+		log.Fatal(http.ListenAndServe(":"+port, handler))
 	}
 }
