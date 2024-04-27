@@ -7,8 +7,8 @@ import (
 	"net/http"
 )
 
-func (m *MicroserviceServer) CreateArticle(rw http.ResponseWriter, r *http.Request) {
-	var article datastruct.Article
+func (m *MicroserviceServer) CreatePost(rw http.ResponseWriter, r *http.Request) {
+	var article datastruct.Post
 	err := json.NewDecoder(r.Body).Decode(&article)
 	if err != nil {
 		http.Error(rw, err.Error(), http.StatusBadRequest)
@@ -29,26 +29,26 @@ func (m *MicroserviceServer) CreateArticle(rw http.ResponseWriter, r *http.Reque
 	}
 }
 
-func (m *MicroserviceServer) ShowArticleWithPaging(rw http.ResponseWriter, r *http.Request) {
+func (m *MicroserviceServer) ShowPostWithPaging(rw http.ResponseWriter, r *http.Request) {
 	err := json.NewEncoder(rw).Encode("Hello")
 	if err != nil {
 		return
 	}
 }
 
-func (m *MicroserviceServer) ShowArticle(rw http.ResponseWriter, r *http.Request) {
+func (m *MicroserviceServer) ShowPost(rw http.ResponseWriter, r *http.Request) {
 	err := json.NewEncoder(rw).Encode("Hello")
 	if err != nil {
 		return
 	}
 }
-func (m *MicroserviceServer) UpdateArticle(rw http.ResponseWriter, r *http.Request) {
+func (m *MicroserviceServer) UpdatePost(rw http.ResponseWriter, r *http.Request) {
 	err := json.NewEncoder(rw).Encode("Hello")
 	if err != nil {
 		return
 	}
 }
-func (m *MicroserviceServer) DeleteArticle(rw http.ResponseWriter, r *http.Request) {
+func (m *MicroserviceServer) DeletePost(rw http.ResponseWriter, r *http.Request) {
 	err := json.NewEncoder(rw).Encode("Hello")
 	if err != nil {
 		return

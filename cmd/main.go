@@ -31,18 +31,18 @@ func main() {
 	*/
 	dao := repository.NewDAO(db)
 
-	articleService := service.NewArticleService(dao)
+	postService := service.NewPostService(dao)
 	/**
 	Registering Services to Server
 	*/
 	server := app.NewMicroservice(
-		articleService,
+		postService,
 	)
 
 	/**
 	DB Migration
 	*/
-	datastruct.Migrate(db, &datastruct.Article{})
+	datastruct.Migrate(db, &datastruct.Post{})
 	serverRouter := adapter.NewRouter(*server)
 
 	port := os.Getenv("PORT")

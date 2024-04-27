@@ -9,7 +9,7 @@ import (
 )
 
 type DAO interface {
-	NewArticleQuery() ArticleQuery
+	NewPostQuery() PostQuery
 }
 
 type dao struct {
@@ -50,6 +50,6 @@ func SetupDB() *gorm.DB {
 	return db
 }
 
-func (d *dao) NewArticleQuery() ArticleQuery {
-	return NewArticleQuery(d.mysqldb)
+func (d *dao) NewPostQuery() PostQuery {
+	return NewPostQuery(d.mysqldb)
 }

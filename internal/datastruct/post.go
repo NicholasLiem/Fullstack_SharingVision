@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-type Article struct {
+type Post struct {
 	ID          uint      `gorm:"primaryKey;autoIncrement" json:"id"`
 	Title       string    `gorm:"size:200;not null" json:"title"`
 	Content     string    `gorm:"type:text;not null" json:"content"`
@@ -16,7 +16,7 @@ type Article struct {
 	Status      string    `gorm:"type:varchar(100);not null;check:status in ('Publish','Draft','Thrash')" json:"status"`
 }
 
-func (a *Article) BeforeSave(tx *gorm.DB) (err error) {
+func (a *Post) BeforeSave(tx *gorm.DB) (err error) {
 	if len(a.Title) < 20 {
 		return errors.New("the title must be at least 20 characters long")
 	}

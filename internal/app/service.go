@@ -3,13 +3,13 @@ package app
 import "github.com/NicholasLiem/BE_T_SharingVision/internal/service"
 
 type MicroserviceServer struct {
-	articleService service.ArticleService
+	postService service.PostService
 }
 
 func NewMicroservice(
-	articleService service.ArticleService,
+	postService service.PostService,
 ) *MicroserviceServer {
 	return &MicroserviceServer{
-		articleService: articleService,
+		postService: postService,
 	}
 }
