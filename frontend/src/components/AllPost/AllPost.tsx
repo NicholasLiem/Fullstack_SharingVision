@@ -1,15 +1,20 @@
 import { useEffect, useState } from 'react';
-import { Tab, Tabs, Table, TableBody, TableCell, TableHead, TableRow, IconButton } from '@mui/material';
-import { deletePost, getAllPost, Post, PostStatus } from '../../api/postApi';
+import { Tab, Tabs, Table, TableBody, TableCell, TableHead, TableRow, IconButton, Snackbar, Alert, AlertColor } from '@mui/material';
+import { getAllPost, Post, PostStatus, updatePost } from '../../api/postApi';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditModal from './EditModal';
+
+type Severity = AlertColor | 'success' | 'error' | 'info' | 'warning';
 
 const AllPosts: React.FC = () => {
   const [activeTab, setActiveTab] = useState<PostStatus>(PostStatus.PUBLISH);
   const [posts, setPosts] = useState<Post[]>([]);
   const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+  const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
+  const [snackbarMessage, setSnackbarMessage] = useState<string>('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState<Severity>('success');
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -33,17 +38,36 @@ const AllPosts: React.FC = () => {
 
   const handleTrash = (postId: number) => {
     const deleteData = async () => {
-      await deletePost(postId);
-      const updatedPosts = posts.filter(post => post.id !== postId);
-      setPosts(updatedPosts);
+      const postToThrashed = posts.find(post => post.id === postId);
+      if (postToThrashed) {
+        postToThrashed.status = PostStatus.THRASH;
+        await updatePost(postId, postToThrashed);
+        handleOpenSnackbar('Success thrashed a post', 'success')
+      }
     };
     deleteData();
+  };
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+  };
+
+  const handleOpenSnackbar = (message: string, severity: Severity) => {
+    setSnackbarMessage(message);
+    setSnackbarSeverity(severity);
+    setOpenSnackbar(true);
   };
 
   const filteredPosts = posts.filter(post => post.status === activeTab);
 
   return (
-    <div style={{ position: 'relative', height: '80vh' }}>
+    <>
+      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+        <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: '100%' }}>
+            {snackbarMessage}
+        </Alert>
+      </Snackbar>
+      <div style={{ position: 'relative', height: '80vh' }}>
       <Tabs value={activeTab} 
             onChange={handleChange}
             style={{ top: 0, left: 0 }}
@@ -90,6 +114,7 @@ const AllPosts: React.FC = () => {
                   post={selectedPost} 
       />
     </div>
+    </>
   );  
 }
 
