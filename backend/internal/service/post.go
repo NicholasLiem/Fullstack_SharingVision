@@ -12,7 +12,7 @@ type PostService interface {
 	UpdatePost(postID uint, updatedPost datastruct.Post) (bool, *utils.HttpError)
 	DeletePost(postID uint) (bool, *utils.HttpError)
 	GetPost(postID uint) (*datastruct.Post, *utils.HttpError)
-	GetPagedPost(limit int, offset int) (*[]datastruct.Post, *utils.HttpError)
+	GetPagedPost(limit int, offset int) (*datastruct.PagedPosts, *utils.HttpError)
 }
 
 type postService struct {
@@ -59,12 +59,11 @@ func (ps *postService) GetPost(postID uint) (*datastruct.Post, *utils.HttpError)
 	return post, nil
 }
 
-func (ps *postService) GetPagedPost(limit int, offset int) (*[]datastruct.Post, *utils.HttpError) {
-	posts, err := ps.dao.NewPostQuery().GetPagedPost(limit, offset)
+func (ps *postService) GetPagedPost(limit int, offset int) (*datastruct.PagedPosts, *utils.HttpError) {
+	posts, totalCount, err := ps.dao.NewPostQuery().GetPagedPost(limit, offset)
 	if err != nil {
 		return nil, &utils.HttpError{Message: "Error getting post: " +
 			err.Error(), StatusCode: http.StatusInternalServerError}
 	}
-
-	return posts, nil
+	return &datastruct.PagedPosts{Posts: *posts, TotalCount: totalCount}, nil
 }

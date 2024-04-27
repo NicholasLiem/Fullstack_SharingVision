@@ -119,14 +119,28 @@ func (m *MicroserviceServer) GetPagedPost(rw http.ResponseWriter, r *http.Reques
 		return
 	}
 
-	result, httpErr := m.postService.GetPagedPost(*parsedLimit, *parsedOffset)
+	pagedPosts, httpErr := m.postService.GetPagedPost(*parsedLimit, *parsedOffset)
 	if httpErr != nil {
 		http.Error(rw, httpErr.Message, httpErr.StatusCode)
 		return
 	}
 
+	totalPages := (pagedPosts.TotalCount + *parsedLimit - 1) / *parsedLimit
+	currentPage := *parsedOffset / *parsedLimit + 1
+
+	response := struct {
+		Posts       []datastruct.Post `json:"posts"`
+		TotalPages  int               `json:"totalPages"`
+		CurrentPage int               `json:"currentPage"`
+	}{
+		Posts:       pagedPosts.Posts,
+		TotalPages:  totalPages,
+		CurrentPage: currentPage,
+	}
+
+	rw.Header().Set("Content-Type", "application/json")
 	rw.WriteHeader(http.StatusOK)
-	if err := json.NewEncoder(rw).Encode(result); err != nil {
+	if err := json.NewEncoder(rw).Encode(response); err != nil {
 		http.Error(rw, err.Error(), http.StatusInternalServerError)
 		return
 	}

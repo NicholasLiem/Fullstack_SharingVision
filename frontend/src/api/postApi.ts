@@ -1,4 +1,4 @@
-import { PostCreateDTO } from '../dto/post';
+import { PagedPostDTO, PostCreateDTO } from '../dto/post';
 import { api } from './index';
 
 export enum PostStatus {
@@ -15,9 +15,9 @@ export interface Post {
   status: PostStatus;
 }
 
-async function getPagedPost(offset: number, limit: number): Promise<Post[]> {
+async function getPagedPost(limit: number, offset: number): Promise<PagedPostDTO> {
   try {
-    const response = await api.get<Post[]>(`/article/${limit}/${offset}`)
+    const response = await api.get<PagedPostDTO>(`/article/${limit}/${offset}`)
     return response.data
   } catch (error) {
     throw new Error("Can't fetch posts")

@@ -16,9 +16,9 @@ const Preview: React.FC = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const data = await getPagedPost(page - 1, itemsPerPage);
-                setPosts(data);
-                setTotalPages(10); 
+                const data = await getPagedPost(itemsPerPage, itemsPerPage * (page - 1));
+                setPosts(data.posts);
+                setTotalPages(data.totalPages); 
             } catch (error) {
                 console.error("Failed to fetch posts:", error);
             }

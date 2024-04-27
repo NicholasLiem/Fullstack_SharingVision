@@ -2,8 +2,8 @@ package datastruct
 
 import (
 	"errors"
-	"time"
 	"gorm.io/gorm"
+	"time"
 )
 
 type Post struct {
@@ -20,13 +20,9 @@ func (post *Post) TableName() string {
 	return "posts"
 }
 
-type PostResponse struct {
-	Title       string    `json:"title"`
-	Content     string    `json:"content"`
-	Category    string    `json:"category"`
-	CreatedDate time.Time `json:"created_date"`
-	UpdatedDate time.Time `json:"updated_date"`
-	Status      string    `json:"status"`
+type PagedPosts struct {
+	Posts      []Post
+	TotalCount int
 }
 
 func (post *Post) BeforeSave(tx *gorm.DB) (err error) {
