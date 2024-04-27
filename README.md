@@ -46,3 +46,6 @@ http://localhost:3001/article
 ```sh
 http://localhost:5000
 ```
+
+## Time to develop
+12 hrs 30 mins (+ breaks)
