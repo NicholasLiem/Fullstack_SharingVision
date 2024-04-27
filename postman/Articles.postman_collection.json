@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "870f1335-d42d-43d6-8e56-791e95fe5a2a",
+		"name": "Articles",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30701742"
+	},
+	"item": [
+		{
+			"name": "Post a new article",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Artikel A Artikel A Artikel A Artikel A\",\n    \"content\": \"Haloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo haloo\",\n    \"category\": \"Film\",\n    \"status\": \"publish\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/article",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"article"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get an article",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/article/1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"article",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an article",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/article/1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"article",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update an article",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Artikel A Artikel A Artikel A Artikel A\",\n    \"content\": \"Haloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo halooHaloo haloo\",\n    \"category\": \"Film\",\n    \"status\": \"publish\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/article/1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"article",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get paged articles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/article/1/2",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"article",
+						"1",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all article data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/article/all",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"article",
+						"all"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
