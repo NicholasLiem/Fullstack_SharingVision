@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Tab, Tabs, Table, TableBody, TableCell, TableHead, TableRow, IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { getAllPost, Post, PostStatus } from '../api/postApi';
+import { deletePost, getAllPost, Post, PostStatus } from '../api/postApi';
 
 const AllPosts: React.FC = () => {
   const [activeTab, setActiveTab] = useState<PostStatus>(PostStatus.PUBLISH);
@@ -10,12 +10,8 @@ const AllPosts: React.FC = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-        try {
-            const data = await getAllPost();
-            setPosts(data);
-        } catch (error) {
-            console.error("Failed to fetch posts:", error);
-        }
+      const data = await getAllPost();
+      setPosts(data);
     };
     fetchPosts();
   }, []);
@@ -29,7 +25,12 @@ const AllPosts: React.FC = () => {
   };
 
   const handleTrash = (postId: number) => {
-    console.log(postId)
+    const deleteData = async () => {
+      await deletePost(postId);
+      const updatedPosts = posts.filter(post => post.id !== postId);
+      setPosts(updatedPosts);
+    };
+    deleteData();
   };
 
   const filteredPosts = posts.filter(post => post.status === activeTab);

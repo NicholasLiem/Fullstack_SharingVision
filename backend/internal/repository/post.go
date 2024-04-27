@@ -70,11 +70,13 @@ func (pq *postQuery) GetPagedPost(limit int, offset int) (*[]datastruct.Post, in
 	var posts []datastruct.Post
 	var total int64
 
-	if err := pq.mysqldb.Model(&datastruct.Post{}).Count(&total).Error; err != nil {
+	query := pq.mysqldb.Model(&datastruct.Post{}).Where("status = ?", "publish")
+
+	if err := query.Count(&total).Error; err != nil {
 		return nil, 0, err
 	}
 
-	result := pq.mysqldb.Offset(offset).Limit(limit).Find(&posts)
+	result := query.Offset(offset).Limit(limit).Find(&posts)
 	if result.Error != nil {
 		return nil, 0, result.Error
 	}

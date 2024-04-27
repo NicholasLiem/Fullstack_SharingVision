@@ -33,6 +33,15 @@ async function createPost(postData: PostCreateDTO): Promise<boolean> {
   }
 }
 
+async function deletePost(postId: number): Promise<boolean> {
+  try {
+    const response = await api.delete(`/article/${postId}`)
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to delete post');
+  }
+}
+
 async function getAllPost(): Promise<Post[]> {
   try {
     const response = await api.get('/article/all');
@@ -47,4 +56,4 @@ async function getPostById(id: number): Promise<Post> {
   return response.data;
 }
 
-export { getPagedPost, getPostById, createPost, getAllPost };
+export { getPagedPost, getPostById, createPost, getAllPost, deletePost };
