@@ -17,7 +17,7 @@ const AllPosts: React.FC = () => {
       setPosts(data);
     };
     fetchPosts();
-  }, []);
+  }, [editModalOpen]);
 
   const handleChange = (_event: React.ChangeEvent<unknown>, newValue: PostStatus) => {
     setActiveTab(newValue);

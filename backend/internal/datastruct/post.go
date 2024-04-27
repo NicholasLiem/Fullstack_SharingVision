@@ -2,7 +2,6 @@ package datastruct
 
 import (
 	"errors"
-	"gorm.io/gorm"
 	"time"
 )
 
@@ -25,7 +24,7 @@ type PagedPosts struct {
 	TotalCount int
 }
 
-func (post *Post) BeforeSave(tx *gorm.DB) (err error) {
+func (post *Post) BeforeSave() (err error) {
 	if len(post.Title) < 20 {
 		return errors.New("the title must be at least 20 characters long")
 	}

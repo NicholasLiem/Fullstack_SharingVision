@@ -1,6 +1,6 @@
 import { Alert, AlertColor, Button, Dialog, DialogActions, DialogContent, DialogTitle, Snackbar, TextField } from "@mui/material";
 import { Post, PostStatus, updatePost } from "../../api/postApi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface EditModalProps {
     open: boolean;
@@ -24,6 +24,13 @@ const EditModal = ({ open, handleClose, post }: EditModalProps) => {
         category: post ? post.category : '',
         status: post ? post.status : ''
     };
+
+    useEffect(() => {
+        if (open) {
+            setFormData(initialFormData);
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [open]);
 
     const [formData, setFormData] = useState<FormData>(initialFormData);
     const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
@@ -94,8 +101,7 @@ const EditModal = ({ open, handleClose, post }: EditModalProps) => {
                         margin="dense"
                         id="title"
                         name="title"
-                        label={post ? '' : 'Title'}
-                        placeholder={post ? post.title : ''}
+                        label='Title'
                         type="text"
                         fullWidth
                         value={formData.title}
@@ -105,8 +111,7 @@ const EditModal = ({ open, handleClose, post }: EditModalProps) => {
                         margin="dense"
                         id="content"
                         name="content"
-                        label={post ? '' : 'Content'}
-                        placeholder={post ? post.content : ''}
+                        label='Content'
                         type="text"
                         fullWidth
                         value={formData.content}
@@ -118,8 +123,7 @@ const EditModal = ({ open, handleClose, post }: EditModalProps) => {
                         margin="dense"
                         id="category"
                         name="category"
-                        label={post ? '' : 'Category'}
-                        placeholder={post ? post.category : ''}
+                        label='Category'
                         type="text"
                         fullWidth
                         value={formData.category}
