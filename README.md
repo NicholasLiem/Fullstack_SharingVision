@@ -16,6 +16,7 @@ CREATE TABLE posts (
 ```
 
 ## Demo (Video)
+![caption](./assets/demo.gif)
 
 ## Postman Collection
 Located in the `postman` folder
