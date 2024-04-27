@@ -29,7 +29,7 @@ const Preview: React.FC = () => {
 
     return (
         <Container>
-            <Typography variant="h4" gutterBottom>
+            <Typography variant="h4" gutterBottom color={"black"}>
                 Posts Preview
             </Typography>
             {posts.length === 0 ? (

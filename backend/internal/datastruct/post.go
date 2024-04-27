@@ -2,12 +2,12 @@ package datastruct
 
 import (
 	"errors"
-	"gorm.io/gorm"
 	"time"
+	"gorm.io/gorm"
 )
 
 type Post struct {
-	ID          uint      `gorm:"primaryKey;autoIncrement"`
+	ID          uint      `gorm:"primaryKey;autoIncrement" json:"id"`
 	Title       string    `gorm:"size:200;not null" json:"title"`
 	Content     string    `gorm:"type:text;not null" json:"content"`
 	Category    string    `gorm:"size:100;not null" json:"category"`
