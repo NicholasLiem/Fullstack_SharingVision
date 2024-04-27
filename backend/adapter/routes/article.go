@@ -17,6 +17,13 @@ func ArticleRoutes(server app.MicroserviceServer) structs.RoutePrefix {
 				true,
 			},
 			{
+				"Get all posts data",
+				"GET",
+				"/all",
+				server.GetAllPost,
+				true,
+			},
+			{
 				"Show article with paging",
 				"GET",
 				"/{limit}/{offset}",

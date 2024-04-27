@@ -12,7 +12,7 @@ const AllPosts: React.FC = () => {
     const fetchPosts = async () => {
         try {
             const data = await getPagedPost(0, 100);
-            setPosts(data);
+            setPosts(data.posts);
         } catch (error) {
             console.error("Failed to fetch posts:", error);
         }

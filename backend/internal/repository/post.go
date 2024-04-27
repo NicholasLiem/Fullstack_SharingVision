@@ -11,6 +11,7 @@ type PostQuery interface {
 	DeletePost(postId uint) (bool, error)
 	GetPost(postId uint) (*datastruct.Post, error)
 	GetPagedPost(limit int, offset int) (*[]datastruct.Post, int, error)
+	GetAllPost() (*[]datastruct.Post, error)
 }
 
 type postQuery struct {
@@ -79,4 +80,15 @@ func (pq *postQuery) GetPagedPost(limit int, offset int) (*[]datastruct.Post, in
 	}
 
 	return &posts, int(total), nil
+}
+
+func (pq *postQuery) GetAllPost() (*[]datastruct.Post, error) {
+	var posts []datastruct.Post
+
+	result := pq.mysqldb.Find(&posts)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+
+	return &posts, nil
 }

@@ -145,3 +145,16 @@ func (m *MicroserviceServer) GetPagedPost(rw http.ResponseWriter, r *http.Reques
 		return
 	}
 }
+
+func (m *MicroserviceServer) GetAllPost(rw http.ResponseWriter, r *http.Request) {
+	result, httpErr := m.postService.GetAllPost()
+	if httpErr != nil {
+		http.Error(rw, httpErr.Message, httpErr.StatusCode)
+		return
+	}
+
+	if err := json.NewEncoder(rw).Encode(result); err != nil {
+		http.Error(rw, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}
