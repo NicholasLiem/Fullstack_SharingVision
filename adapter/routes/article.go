@@ -20,14 +20,14 @@ func ArticleRoutes(server app.MicroserviceServer) structs.RoutePrefix {
 				"Show article with paging",
 				"GET",
 				"/{limit}/{offset}",
-				server.ShowPostWithPaging,
+				server.GetPagedPost,
 				true,
 			},
 			{
 				"Show article with a specific id",
-				"POST",
+				"GET",
 				"/{id}",
-				server.ShowPost,
+				server.GetPost,
 				true,
 			},
 			{

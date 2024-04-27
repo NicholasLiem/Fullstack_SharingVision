@@ -7,7 +7,7 @@ import (
 )
 
 type Post struct {
-	ID          uint      `gorm:"primaryKey;autoIncrement" json:"id"`
+	ID          uint      `gorm:"primaryKey;autoIncrement"`
 	Title       string    `gorm:"size:200;not null" json:"title"`
 	Content     string    `gorm:"type:text;not null" json:"content"`
 	Category    string    `gorm:"size:100;not null" json:"category"`
@@ -16,20 +16,44 @@ type Post struct {
 	Status      string    `gorm:"type:varchar(100);not null;check:status in ('Publish','Draft','Thrash')" json:"status"`
 }
 
-func (a *Post) BeforeSave(tx *gorm.DB) (err error) {
-	if len(a.Title) < 20 {
+func (post *Post) TableName() string {
+	return "posts"
+}
+
+type PostResponse struct {
+	Title       string    `json:"title"`
+	Content     string    `json:"content"`
+	Category    string    `json:"category"`
+	CreatedDate time.Time `json:"created_date"`
+	UpdatedDate time.Time `json:"updated_date"`
+	Status      string    `json:"status"`
+}
+
+func (post *Post) ToPostResponse() *PostResponse {
+	return &PostResponse{
+		Title:       post.Title,
+		Content:     post.Content,
+		Category:    post.Category,
+		CreatedDate: post.CreatedDate,
+		UpdatedDate: post.UpdatedDate,
+		Status:      post.Status,
+	}
+}
+
+func (post *Post) BeforeSave(tx *gorm.DB) (err error) {
+	if len(post.Title) < 20 {
 		return errors.New("the title must be at least 20 characters long")
 	}
-	if len(a.Content) < 200 {
+	if len(post.Content) < 200 {
 		return errors.New("the content must be at least 200 characters long")
 	}
 
-	if len(a.Category) < 3 {
+	if len(post.Category) < 3 {
 		return errors.New("the category must be at least 3 characters long")
 	}
 
 	validStatus := map[string]bool{"publish": true, "draft": true, "thrash": true}
-	if _, ok := validStatus[a.Status]; !ok {
+	if _, ok := validStatus[post.Status]; !ok {
 		return errors.New("invalid status, must be 'publish', 'draft', or 'thrash'")
 	}
 

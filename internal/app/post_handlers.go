@@ -2,40 +2,133 @@ package app
 
 import (
 	"encoding/json"
+	"github.com/NicholasLiem/BE_T_SharingVision/internal/datastruct"
+	"github.com/NicholasLiem/BE_T_SharingVision/utils"
+	"github.com/gorilla/mux"
 	"net/http"
 )
 
 func (m *MicroserviceServer) CreatePost(rw http.ResponseWriter, r *http.Request) {
+	var post datastruct.Post
+
+	if err := json.NewDecoder(r.Body).Decode(&post); err != nil {
+		http.Error(rw, "Invalid request payload", http.StatusBadRequest)
+		return
+	}
+
+	result, httpErr := m.postService.CreatePost(post)
+	if httpErr != nil {
+		http.Error(rw, httpErr.Message, httpErr.StatusCode)
+		return
+	}
+
 	rw.WriteHeader(http.StatusCreated)
-	err := json.NewEncoder(rw).Encode("hello")
-	if err != nil {
+	if err := json.NewEncoder(rw).Encode(result); err != nil {
 		http.Error(rw, err.Error(), http.StatusInternalServerError)
 		return
 	}
 }
 
-func (m *MicroserviceServer) ShowPostWithPaging(rw http.ResponseWriter, r *http.Request) {
-	err := json.NewEncoder(rw).Encode("Hello")
+func (m *MicroserviceServer) GetPost(rw http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	postId := params["id"]
+
+	parsedPostId, err := utils.ParseStrToUint(postId)
 	if err != nil {
+		http.Error(rw, "Invalid post id", http.StatusBadRequest)
+		return
+	}
+
+	result, httpErr := m.postService.GetPost(*parsedPostId)
+	if httpErr != nil {
+		http.Error(rw, httpErr.Message, httpErr.StatusCode)
+		return
+	}
+
+	response := result.ToPostResponse()
+	if err := json.NewEncoder(rw).Encode(response); err != nil {
+		http.Error(rw, err.Error(), http.StatusInternalServerError)
 		return
 	}
 }
 
-func (m *MicroserviceServer) ShowPost(rw http.ResponseWriter, r *http.Request) {
-	err := json.NewEncoder(rw).Encode("Hello")
-	if err != nil {
-		return
-	}
-}
 func (m *MicroserviceServer) UpdatePost(rw http.ResponseWriter, r *http.Request) {
-	err := json.NewEncoder(rw).Encode("Hello")
+	params := mux.Vars(r)
+	postId := params["id"]
+
+	parsedPostId, err := utils.ParseStrToUint(postId)
 	if err != nil {
+		http.Error(rw, "Invalid post id", http.StatusBadRequest)
+		return
+	}
+
+	var updatedPost datastruct.Post
+	if err := json.NewDecoder(r.Body).Decode(&updatedPost); err != nil {
+		http.Error(rw, "Invalid request payload", http.StatusBadRequest)
+		return
+	}
+
+	result, httpErr := m.postService.UpdatePost(*parsedPostId, updatedPost)
+	if httpErr != nil {
+		http.Error(rw, httpErr.Message, httpErr.StatusCode)
+		return
+	}
+
+	if err := json.NewEncoder(rw).Encode(result); err != nil {
+		http.Error(rw, err.Error(), http.StatusInternalServerError)
 		return
 	}
 }
+
 func (m *MicroserviceServer) DeletePost(rw http.ResponseWriter, r *http.Request) {
-	err := json.NewEncoder(rw).Encode("Hello")
+	params := mux.Vars(r)
+	postId := params["id"]
+
+	parsedPostId, err := utils.ParseStrToUint(postId)
 	if err != nil {
+		http.Error(rw, "Invalid post id", http.StatusBadRequest)
+		return
+	}
+
+	result, httpErr := m.postService.DeletePost(*parsedPostId)
+	if httpErr != nil {
+		http.Error(rw, httpErr.Message, httpErr.StatusCode)
+		return
+	}
+
+	rw.WriteHeader(http.StatusOK)
+	if err := json.NewEncoder(rw).Encode(result); err != nil {
+		http.Error(rw, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}
+
+func (m *MicroserviceServer) GetPagedPost(rw http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	limit := params["limit"]
+	offset := params["offset"]
+
+	parsedLimit, err := utils.ParseStrToInt(limit)
+	if err != nil {
+		http.Error(rw, "Invalid limit number", http.StatusBadRequest)
+		return
+	}
+
+	parsedOffset, err := utils.ParseStrToInt(offset)
+	if err != nil {
+		http.Error(rw, "Invalid post id", http.StatusBadRequest)
+		return
+	}
+
+	result, httpErr := m.postService.GetPagedPost(*parsedLimit, *parsedOffset)
+	if httpErr != nil {
+		http.Error(rw, httpErr.Message, httpErr.StatusCode)
+		return
+	}
+
+	rw.WriteHeader(http.StatusOK)
+	if err := json.NewEncoder(rw).Encode(result); err != nil {
+		http.Error(rw, err.Error(), http.StatusInternalServerError)
 		return
 	}
 }
