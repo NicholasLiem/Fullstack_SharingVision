@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Preview from './components/Preview';
+import Preview from './components/Preview/Preview';
 import AllPosts from './components/AllPost';
 import NewPost from './components/NewPost';
 
@@ -29,8 +29,8 @@ function App() {
       width: '100vw',
     }}>
       <div style={{ marginBottom: '20px' }}>
-        <button onClick={() => setActiveComponent('preview')}>Preview</button>
-        <button onClick={() => setActiveComponent('allPosts')}>All Posts</button>
+        <button onClick={() => setActiveComponent('preview')} style={{ marginRight: '10px' }}>Preview</button>
+        <button onClick={() => setActiveComponent('allPosts')} style={{ marginRight: '10px' }}>All Posts</button>
         <button onClick={() => setActiveComponent('newPost')}>New Post</button>
       </div>
       <div style={{

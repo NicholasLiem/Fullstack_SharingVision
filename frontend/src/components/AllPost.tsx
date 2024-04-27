@@ -36,44 +36,49 @@ const AllPosts: React.FC = () => {
   const filteredPosts = posts.filter(post => post.status === activeTab);
 
   return (
-    <>
-      <Tabs value={activeTab} onChange={handleChange}>
+    <div style={{ position: 'relative', height: '80vh' }}>
+      <Tabs value={activeTab} 
+            onChange={handleChange}
+            style={{ top: 0, left: 0 }}
+      >
         <Tab label="Published" value={PostStatus.PUBLISH} />
         <Tab label="Drafts" value={PostStatus.DRAFT} />
         <Tab label="Trashed" value={PostStatus.THRASH} />
       </Tabs>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Title</TableCell>
-            <TableCell>Category</TableCell>
-            <TableCell>Action</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {filteredPosts.length > 0 ? (
-            filteredPosts.map((post: Post) => (
-              <TableRow key={post.id}>
-                <TableCell>{post.title}</TableCell>
-                <TableCell>{post.category}</TableCell>
-                <TableCell>
-                  <IconButton onClick={() => handleEdit(post.id)}>
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton onClick={() => handleTrash(post.id)}>
-                    <DeleteIcon />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))
-          ) : (
+      <div style={{ width: '60vw'}}>
+        <Table>
+          <TableHead>
             <TableRow>
-              <TableCell colSpan={3}>No posts available.</TableCell>
+              <TableCell>Title</TableCell>
+              <TableCell>Category</TableCell>
+              <TableCell>Action</TableCell>
             </TableRow>
-          )}
-        </TableBody>
-      </Table>
-    </>
+          </TableHead>
+          <TableBody>
+            {filteredPosts.length > 0 ? (
+              filteredPosts.map((post: Post) => (
+                <TableRow key={post.id}>
+                  <TableCell>{post.title}</TableCell>
+                  <TableCell>{post.category}</TableCell>
+                  <TableCell>
+                    <IconButton onClick={() => handleEdit(post.id)}>
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton onClick={() => handleTrash(post.id)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={3}>No posts available.</TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
+    </div>
   );  
 }
 
