@@ -16,5 +16,21 @@ services:
     volumes:
       - mysql-db:/var/lib/mysql
 
+  app:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    restart: always
+    ports:
+      - '3001:3001'
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USER=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+    depends_on:
+      - db
+
 volumes:
   mysql-db:

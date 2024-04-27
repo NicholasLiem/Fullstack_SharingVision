@@ -46,7 +46,7 @@ func main() {
 	datastruct.Migrate(db, &datastruct.Post{})
 	serverRouter := adapter.NewRouter(*server)
 
-	port := os.Getenv("PORT")
+	port := os.Getenv("BE_PORT")
 	log.Println("[Server] Running the server on port " + port)
 
 	if os.Getenv("ENVIRONMENT") == "DEV" {
